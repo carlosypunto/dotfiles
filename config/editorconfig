@@ -1,0 +1,74 @@
+root = true
+
+# ─── Defaults ─────────────────────────────────────────────────────────────────
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# ─── Swift ────────────────────────────────────────────────────────────────────
+[*.swift]
+indent_style = space
+indent_size = 4
+
+# ─── Shell ────────────────────────────────────────────────────────────────────
+[*.{zsh,sh,bash}]
+indent_style = space
+indent_size = 4
+
+# ─── Dart / Flutter ───────────────────────────────────────────────────────────
+[*.dart]
+indent_style = space
+indent_size = 2
+
+# ─── Ruby ─────────────────────────────────────────────────────────────────────
+[*.{rb,gemspec}]
+indent_style = space
+indent_size = 2
+
+# ─── JavaScript / TypeScript ──────────────────────────────────────────────────
+[*.{js,mjs,cjs,ts,tsx,jsx}]
+indent_style = space
+indent_size = 2
+
+# ─── Web ──────────────────────────────────────────────────────────────────────
+[*.{html,css,scss,vue,svelte}]
+indent_style = space
+indent_size = 2
+
+# ─── Data / Config ────────────────────────────────────────────────────────────
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
+[*.toml]
+indent_style = space
+indent_size = 2
+
+# ─── Xcode / Apple ────────────────────────────────────────────────────────────
+# Xcode genera estos archivos con tabs; respetar su formato para evitar diffs sucios.
+[*.{pbxproj,xcscheme,xcsettings}]
+indent_style = tab
+indent_size = 2
+
+# Package.swift sigue las mismas convenciones que Swift
+[Package.swift]
+indent_style = space
+indent_size = 4
+
+# ─── Markdown ─────────────────────────────────────────────────────────────────
+# trim_trailing_whitespace = false porque dos espacios al final son un <br> en Markdown
+[*.{md,mdx}]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+
+# ─── Makefile ─────────────────────────────────────────────────────────────────
+# Make requiere tabs obligatoriamente
+[{Makefile,*.mk}]
+indent_style = tab

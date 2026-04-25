@@ -1,0 +1,84 @@
+# ─── General format ───────────────────────────────────────────────────────────
+# Two lines: contextual info on top, cursor below. Prevents the prompt from
+# stretching horizontally when branch + versions + status appear simultaneously.
+format = """
+$directory$git_branch$git_status$swift$rust$nodejs$docker_context
+$character"""
+
+# Maximum time (ms) Starship waits for a command to finish before skipping its
+# output. Key for git_status in large repositories.
+command_timeout = 500
+
+# ─── Directory ────────────────────────────────────────────────────────────────
+[directory]
+truncation_length = 4       # show the last 4 path segments
+truncate_to_repo = true     # inside a repo, the repo root is the starting point
+style = "bold blue"
+
+# ─── Git ──────────────────────────────────────────────────────────────────────
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+symbol = " "
+style = "bold purple"
+
+[git_status]
+# Only show what matters; omit untracked to avoid slowing down repos with
+# many untracked files (ignored node_modules, builds, etc.)
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold yellow"
+conflicted = "≠"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+staged = "+${count}"
+modified = "~${count}"
+deleted = "-${count}"
+untracked = ""              # disabled: expensive in large repos
+
+# ─── Swift ────────────────────────────────────────────────────────────────────
+[swift]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "bold orange"
+# Only appears in SPM projects; avoids the module for any stray .swift file
+detect_files = ["Package.swift"]
+detect_extensions = []
+
+# ─── Rust ─────────────────────────────────────────────────────────────────────
+[rust]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "bold red"
+
+# ─── Node.js ──────────────────────────────────────────────────────────────────
+[nodejs]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "bold green"
+# Only appears with package.json or .nvmrc; not in every directory
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+detect_folders = []
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+# Only visible when there is an active Docker context other than "default"
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = " "
+style = "bold blue"
+only_with_files = false
+
+# ─── Disabled modules ─────────────────────────────────────────────────────────
+# Ruby: rbenv already manages the environment; the module adds ~30ms with no new info
+[ruby]
+disabled = true
+
+[python]
+disabled = true
+
+[package]
+disabled = true             # package.json version — noise in most projects
+
+# ─── Prompt character ─────────────────────────────────────────────────────────
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"    # red if the previous command failed

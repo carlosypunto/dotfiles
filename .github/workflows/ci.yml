@@ -1,0 +1,47 @@
+# Minimum CI on macOS.
+#
+# Scope: Run ./test.sh on a clean macOS runner to detect basic
+# repo breakages (bash/zsh syntax, chained module loading, zprof, and
+# anti-drift for docs/reference.md).
+#
+# Homebrew is excluded from the critical path: SKIP_BREWFILE=1 skips check 5.
+# Reason: the runner’s Homebrew state does not represent the user’s environment
+# and is not part of the repo’s contract. If Brewfile coverage is desired later,
+# it will be added in a separate, non-blocking job, not here.
+# (See CLAUDE.md → “Closed architectural reasons” for the reasoning.)
+#
+# Security: the workflow does not install anything, does not cache mutable state, does not use
+# third-party actions outside of actions/checkout@v4 (GitHub first-party)
+# and does not execute remote code. Concurrency configured to cancel obsolete runs
+# on the same branch without overloading macOS minutes.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  merge_group:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Smoke test (macOS)
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ./test.sh
+        env:
+          SKIP_BREWFILE: "1"
+        run: ./test.sh

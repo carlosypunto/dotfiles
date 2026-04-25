@@ -1,0 +1,33 @@
+[core]
+    editor = zed --wait
+[color]
+	ui = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential]
+	helper = osxkeychain
+[mergetool]
+	keepBackup = false
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[gpg]
+	format = ssh
+
+# Machine-specific config: signingkey, email overrides, etc.
+# This file must not be in the repository; create it manually or with install.sh.
+[include]
+	path = ~/.gitconfig.local
