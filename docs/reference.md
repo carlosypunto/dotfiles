@@ -243,6 +243,7 @@ All packages are installed with `brew bundle --file=Brewfile`. Idempotent — on
 | Formula | Purpose |
 |---|---|
 | `uv` | Ultra-fast Python package installer and resolver |
+| `hatch` | Modern, extensible Python project management |
 
 ### iOS / macOS — Dependencies and Tooling
 | Formula | Purpose |
@@ -256,6 +257,7 @@ All packages are installed with `brew bundle --file=Brewfile`. Idempotent — on
 | `xcbeautify` | Beautifier for `xcodebuild` output |
 | `xcodegen` | Generate `.xcodeproj` from spec and folder structure |
 | `xcresultparser` | Parse `.xcresult` from builds and tests |
+| `getsentry/xcodebuildmcp/xcodebuildmcp` | MCP server for Xcode project workflows (XcodeBuildMCP) |
 
 ### Swift Server-Side
 | Formula | Purpose |

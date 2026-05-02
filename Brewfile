@@ -42,6 +42,7 @@ brew "yarn"                      # alternative package manager
 
 # ─── Python ──────────────────────────────────────────────────────────────────
 brew "uv"                        # ultrafast Python package installer and resolver
+brew "hatch"                     # Modern, extensible Python project management
 
 # ─── iOS / macOS — dependencies and tooling ──────────────────────────────────
 brew "cocoapods"                 # Cocoa dependency manager
@@ -53,6 +54,7 @@ brew "swiftlint"                 # Swift style linter
 brew "xcbeautify"                # xcodebuild output beautifier
 brew "xcodegen"                  # generates .xcodeproj from spec and folder structure
 brew "xcresultparser"            # parses .xcresult from builds and tests
+brew "getsentry/xcodebuildmcp/xcodebuildmcp" # MCP server for Xcode project workflows
 
 # ─── Swift server-side ───────────────────────────────────────────────────────
 brew "vapor"                     # Vapor CLI (Swift web framework)

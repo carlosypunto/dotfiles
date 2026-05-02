@@ -142,6 +142,26 @@ fi
 
 `source <(rustup completions zsh)` (rustup itself) is safe — has `funcstack` guard.
 
+## Known Trap: Brewfile tap declarations
+
+**Don't use** the two-line `tap` + `brew` format for third-party tap formulas:
+
+```ruby
+# Wrong — fragile outside brew bundle
+tap "getsentry/xcodebuildmcp"
+brew "xcodebuildmcp"
+```
+
+This works locally when the tap is already installed, but `brew install xcodebuildmcp` on a fresh machine fails with "No available formula" because the tap isn't yet registered.
+
+**Correct** — use the fully-qualified inline path:
+
+```ruby
+brew "getsentry/xcodebuildmcp/xcodebuildmcp"
+```
+
+Homebrew auto-taps the repo when the formula path is fully qualified. Consistent with all other tap formulas in this repo: `ejoffe/tap/spr`, `withgraphite/tap/graphite`, `anomalyco/tap/opencode`.
+
 ## Established Performance Patterns
 
 Respect when adding code; breaking one needs explicit justification:
@@ -231,3 +251,4 @@ Decisions made with explicit rationale; opening them requires reopening the disc
 - [docs/conventions.md](docs/conventions.md) — **requirements for adding aliases, functions and test flow**
 - [docs/reference.md](docs/reference.md) — exhaustive reference (aliases, functions, completions, Brewfile packages, `./test.sh` with eight checks, `DOTFILES`, `SKIP_BREWFILE`, CI)
 - [docs/swift.md](docs/swift.md) — Swiftly vs Xcode
+- If using XcodeBuildMCP, use the installed XcodeBuildMCP skill before calling XcodeBuildMCP tools.
