@@ -85,6 +85,7 @@ cask "tower"                     # Git client
 cask "tuist"                     # Xcode project management at scale
 cask "lm-studio"                 # LM Studio, run LLMs locally
 cask "sloth"                     # shows all open files and sockets currently in use
+cask "warp"                      # Rust-based terminal
 
 # ─── GUI apps with volatile cask name — verify before uncommenting ────────────
 # cask "docker-desktop"            # Docker Desktop (renamed in some versions)
